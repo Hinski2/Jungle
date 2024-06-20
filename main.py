@@ -1,6 +1,5 @@
 import subprocess
 
-# NO_ANIMAL, RAT, CAT, DOG, WOLF, JAGUAR, TIGER, LION, ELEPHANT = range(9)
 animals = range(1,9)
 name_of_animal = {
     1: "RAT",
@@ -22,21 +21,17 @@ def check(result, animal, trybe, phase):
 
 def main():
     # obsługa jednego zwierzęcia
-    for animal in animals:
+    for animal in [4, 5, 6, 7, 8]:
         for trybe in range(2):
             # jeśli tryb 0 to przeciwnik robi losowe ruchy
             # jeśli tryb 1 to przeciwnik preferuje ruchy do przodu
         
             # najpierw generujemy bota dla gracza
-            result = subprocess.run(['python3', 'bot_generator.py', name_of_animal[animal], trybe])
+            result = subprocess.run(['python', 'bot_generator.py', name_of_animal[animal], str(trybe)])
             check(result, animal, trybe, "generacja bota")
             
-            # bot gotowy, czas go przetestować
-            result = subprocess.run(['python3', 'stats_generator.py', name_of_animal[animal], trybe])
-            check(result, animal, trybe, "generacja statystyk")
-            
-            # statystyki gotowe
-            result = subprocess.run(['python3', 'chart_generator.py', name_of_animal[animal], trybe])
+            # statystyki i bot gotowe można je przeanalizować 
+            result = subprocess.run(['python', 'chart_generator.py', name_of_animal[animal], str(trybe)])
             check(result, animal, trybe, "generacja wykresów")
         
     
